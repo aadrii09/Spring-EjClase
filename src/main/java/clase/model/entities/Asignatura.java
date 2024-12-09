@@ -1,12 +1,22 @@
 package clase.model.entities;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import org.hibernate.annotations.ManyToAny;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+@Entity
+@Table(name="asignaturas")
 public class Asignatura {
     
     @Id
@@ -16,6 +26,10 @@ public class Asignatura {
     private String nombre;
     @Column(length = 55, nullable = false)
     private LocalDate horas;
+    
+    //relaccion
+    @ManyToMany(mappedBy = "listaAsignaturas", fetch = FetchType.EAGER)
+    List<Alumno> listaAlumnos;
     
     public Asignatura() {
     }
@@ -54,6 +68,16 @@ public class Asignatura {
     public void setHoras(LocalDate horas) {
         this.horas = horas;
     }
+
+    public List<Alumno> getListaAlumnos() {
+        return listaAlumnos;
+    }
+
+    public void setListaAlumnos(List<Alumno> listaAlumnos) {
+        this.listaAlumnos = listaAlumnos;
+    }
+
+    
 
     
 

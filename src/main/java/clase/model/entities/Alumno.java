@@ -1,10 +1,23 @@
 package clase.model.entities;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="alumnos")
 public class Alumno {
 
     @Id
@@ -16,7 +29,14 @@ public class Alumno {
     private Integer edad;
     @Column(length = 55, nullable = false)
     private String dni;
-    
+    @JsonIgnore
+    //relaccion
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name ="alumnoAsignatura", 
+    joinColumns = @JoinColumn(name="alumno_id"), 
+    inverseJoinColumns = @JoinColumn(name="asignatura_id"))
+    List<Asignatura> listaAsignaturas;
+   
 
     public Alumno() {
     }
@@ -65,6 +85,16 @@ public class Alumno {
     public void setDni(String dni) {
         this.dni = dni;
     }
+
+    public List<Asignatura> getListaAsignaturas() {
+        return listaAsignaturas;
+    }
+
+    public void setListaAsignaturas(List<Asignatura> listaAsignaturas) {
+        this.listaAsignaturas = listaAsignaturas;
+    }
+
+   
     
 
     
