@@ -32,9 +32,12 @@ public class Alumno {
     @JsonIgnore
     //relaccion
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name ="alumnoAsignatura", 
-    joinColumns = @JoinColumn(name="alumno_id"), 
-    inverseJoinColumns = @JoinColumn(name="asignatura_id"))
+    @JoinTable(name="alumnoasignatura",
+        joinColumns=
+            @JoinColumn(name="alumno_id", referencedColumnName="id"),
+        inverseJoinColumns=
+            @JoinColumn(name="asignatura_id", referencedColumnName="id")
+        )
     List<Asignatura> listaAsignaturas;
    
 

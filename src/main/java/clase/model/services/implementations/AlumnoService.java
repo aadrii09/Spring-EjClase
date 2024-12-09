@@ -1,6 +1,7 @@
 package clase.model.services.implementations;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,18 @@ public class AlumnoService implements IAlumnoService {
         //segundo paso: aqui le digo lo que tiene q buscar
         return alumnoRepo.findAll();
         
+    }
+    @Override
+    public Alumno buscarId(Integer id) {
+        Optional<Alumno> optionalAlumno=alumnoRepo.findById(id);
+
+         if (optionalAlumno.isPresent()) {
+             return optionalAlumno.get();
+         }else{
+             return null;
+         }
+
+     //   return optionalAlumno.isPresent() ? optionalAlumno.get():null;
     }
     
     

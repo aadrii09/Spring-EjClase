@@ -8,4 +8,7 @@ public interface IAlumnoService {
 
     //esto es para que me devuelva una lista alumnos
     public List<Alumno> listaAlumnos(); 
+
+    Alumno buscarId(Integer id);
+    
 }
